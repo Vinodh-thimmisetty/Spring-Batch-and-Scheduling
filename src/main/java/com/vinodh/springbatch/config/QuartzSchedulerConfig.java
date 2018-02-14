@@ -62,7 +62,8 @@ public class QuartzSchedulerConfig {
 	public SchedulerFactoryBean vinodhScheduler() throws Exception {
 		SchedulerFactoryBean factory = new SchedulerFactoryBean();
 		factory.setOverwriteExistingJobs(true);
-		factory.setDataSource(dbConfig.dataSource());
+		//factory.setDataSource(dbConfig.dataSource());
+		factory.setDataSource(dbConfig.dataSource_memory());
 		factory.setJobFactory(springBeanJobFactory());
 		factory.setQuartzProperties(quartzProperties());
 		factory.setTriggers(simpleTrigger());
