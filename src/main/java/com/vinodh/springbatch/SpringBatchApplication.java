@@ -1,5 +1,6 @@
 package com.vinodh.springbatch;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import org.quartz.CronExpression;
@@ -19,11 +20,13 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import com.vinodh.springbatch.quartz.HelloJob;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.net.aso.a;
 
 @SpringBootApplication
 @Slf4j
@@ -32,6 +35,18 @@ public class SpringBatchApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBatchApplication.class, args);
+	}
+	
+	@Bean
+	CommandLineRunner commandLineRunner(ApplicationContext applicationContext) {
+		return a -> {
+			Arrays
+				.stream(applicationContext.getBeanDefinitionNames())
+				.filter( beanName -> beanName.equalsIgnoreCase("schedulerFactoryBean"))
+				.forEach( xx -> { 
+					log.info(">>>>>>>>>>>>>>>>>>>>> {}",xx);
+				});;
+		};
 	}
 
 	/*@Bean
