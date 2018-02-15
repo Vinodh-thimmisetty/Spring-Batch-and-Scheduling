@@ -2,6 +2,7 @@ package com.vinodh.springbatch.transform;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.stereotype.Component;
 
 import com.vinodh.springbatch.model.Person;
 
@@ -16,16 +17,19 @@ import lombok.extern.slf4j.Slf4j;
  * @author jdeveloper
  *
  */
+@Component
 @Slf4j
 public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 
 	@Override
 	public Person process(final Person inputValues) throws Exception {
 
-		log.info("Starting the Conversion");
-
-		return new Person(StringUtils.capitalize(inputValues.getFirstName()),
+		Person transformedPerson = new Person(StringUtils.capitalize(inputValues.getFirstName()),
 				StringUtils.capitalize(inputValues.getLastName()));
+
+		log.info("Converting (" + inputValues + ") into (" + transformedPerson + ")");
+
+		return transformedPerson;
 	}
 
 }

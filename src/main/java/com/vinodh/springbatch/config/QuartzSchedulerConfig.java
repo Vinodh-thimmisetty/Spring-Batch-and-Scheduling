@@ -37,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 @Import(DbConfig.class)
 @Transactional
 @Slf4j
-//@ConditionalOnProperty(name = "quartz.enabled")
+@ConditionalOnProperty(name = "quartz.enabled")
 public class QuartzSchedulerConfig {
 
 	@Autowired
